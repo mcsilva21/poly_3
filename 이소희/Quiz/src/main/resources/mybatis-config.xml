@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>	
+		<typeAlias type="kr.ac.kopo.quiz.model.User" alias="User"/>
+		<typeAlias type="kr.ac.kopo.quiz.model.Q" alias="Q"/>
+<!-- 		<typeAlias type="kr.ac.kopo.quiz.model.UserQuiz" alias="UserQuiz"/> -->
+<!-- 		<typeAlias type="kr.ac.kopo.quiz.model.Scores" alias="Scores"/> -->
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/user.xml" />
+		<mapper resource="mybatis/q.xml" />
+<!-- 		<mapper resource="mybatis/userquiz.xml" /> -->
+<!-- 		<mapper resource="mybatis/scores.xml" /> -->
+	</mappers>
+</configuration>
