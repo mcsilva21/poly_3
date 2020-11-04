@@ -23,17 +23,17 @@
 	</beans:bean>
 		<context:component-scan base-package="kr.ac.kopo" />
 		
-		<interceptors>
-		<interceptor>
-			<mapping path="/user/list"/>
-			<beans:bean class="kr.ac.kopo.quiz.util.UserInterceptor"></beans:bean>
-		</interceptor>
-		<interceptor>
-			<mapping path="/user/**"/>
-			<exclude-mapping path="/user/list"/>
-			<beans:bean class="kr.ac.kopo.quiz.util.AdminInterceptor"></beans:bean>
-		</interceptor>		
-		</interceptors>
+<!-- 		<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/user/**"/> -->
+<!-- 			<beans:bean class="kr.ac.kopo.quiz.util.UserInterceptor"></beans:bean> -->
+<!-- 		</interceptor> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/user/**"/> -->
+<!-- 			<exclude-mapping path="/user/list"/> -->
+<!-- 			<beans:bean class="kr.ac.kopo.quiz.util.AdminInterceptor"></beans:bean> -->
+<!-- 		</interceptor>		 -->
+<!-- 		</interceptors> -->
 
 	</beans:beans>
 	

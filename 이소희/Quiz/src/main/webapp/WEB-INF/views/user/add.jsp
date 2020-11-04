@@ -16,7 +16,7 @@ div {
 </style>
 </head>
 <body>
-	<section class="content-section bg-primary text-black">
+
 		<h1>Signup</h1>
 		<article>
 

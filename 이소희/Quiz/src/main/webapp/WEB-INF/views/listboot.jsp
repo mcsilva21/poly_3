@@ -28,6 +28,7 @@ li {
  body{
  font-size:16px;
  background: #1d809f;
+ 
 }
  
  article {

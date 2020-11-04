@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,43 +95,45 @@ public class QController {
 	
 	// 점수 계산
 	@PostMapping("/exam")
-	String test(HttpServletRequest request, HttpSession session) {
+	String exam(HttpServletRequest request, HttpSession session) {
+		Pager pager = new Pager();
+		pager.setPage(1);
+		List<Q> list = service.list(pager);
 		
 		
 		Enumeration keys = request.getParameterNames();
-		ArrayList<String> rightArr = new ArrayList<String>();
 		ArrayList<String> userArr = new ArrayList<String>();
 
 		while(keys.hasMoreElements()) {
 			String key = (String) keys.nextElement();
 			System.out.println(key + " : " + request.getParameter(key));
-			char check = key.charAt(0);
-
-			if ( check == 'r' ) {
-				rightArr.add(request.getParameter(key));
-			} else if (check == 'u'){
-				userArr.add(request.getParameter(key));
-			}
+			
+			// key 값은 userquiz + 퀴즈아이디 로 시작하고, 
+			// request.getParameter(key) 얻는 값은 사용자 선택 답안
+			if(key.startsWith("userquiz"))
+				userArr.add(key);
 		}
 		
 		int count = 0;
-		if(rightArr.size()>0 && userArr.size()>0) {
-			for (int i = 0; i < rightArr.size(); i++) {
-//				System.out.println( "list1 : " + rightArr.get(i) );
-//				System.out.println( "list2 : " + userArr.get(i) );
-				if ( rightArr.get(i).equals(userArr.get(i)) )
-					count += 1;
+		if(userArr.size() > 0) {
+			for(String key : userArr) {
+				// key 값에서 quizId 값은 substring 으로 추출하여, service.item() 에 넘겨 주어 해당 퀴즈 객체를 얻는다
+				Q quizId = service.item( Integer.parseInt(key.substring(8)) );
+				
+				String answer = request.getParameter(key); 
+				if( quizId.getRightAnswer() == Integer.parseInt(answer) )
+					count++;
 			}
 		}
 		
-		if(session.getAttribute("score")==null) {
+		if(session.getAttribute("score")!=null) {
 			int score = count * 20;
 			session.setAttribute("score", score);
-		} else if (session.getAttribute("score")!=null)		{
-			session.removeAttribute("score");
+		} else if (session.getAttribute("score")==null)		{
+			session.setAttribute("score", 0);
 		}
 
 	
-		return path + "exam";
+		return path + "result";
 }
 }

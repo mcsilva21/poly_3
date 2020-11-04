@@ -47,7 +47,7 @@
 		<c:forEach var="item" items="${list}" begin="0" end="4" varStatus="status"> 
 		    <div>
 		    <label><b>문 제 : ${item.quiz}</b></label><br>
-		    <input name="rightAnswer${item.quizId}" value="${ item.rightAnswer }" hidden>
+		  
 		    
 		    <ol>
 			<li><label> <input type="radio" name="userquiz${item.quizId}" value="1">
@@ -66,14 +66,6 @@
 		</div>
 		</c:forEach>
 		
-		<c:choose>
-			<c:when test="${sessionScope.score == null}">
-				<h2></h2>
-			</c:when>
-			<c:otherwise>
-				<h2>점수 : ${sessionScope.score}</h2>
-			</c:otherwise>
-		</c:choose>
 
 		
 		
